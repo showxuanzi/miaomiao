@@ -1,0 +1,49 @@
+body,html,head,header,section,footer,h1,h2,h3,h4,h5,h6,div,p,a,img,ul,li,ol,dl,dd,dt,form,input,button,textarea,select,option,table,thead,tbody,tfoot,th,tr,td,span{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+body,html{
+    font-family:  'Microsoft Yahei',SimHei,Verdana;
+    color: #333;
+    font-size: 14px;
+    height:100%;
+}
+input,a,button{
+    outline: none;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+img{
+    border: 0;
+    border: none;
+}
+a:hover{
+    color: #fa820c;
+}
+li{
+    list-style: none;
+}
+.clearfix:after{
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+#main{
+    height: 100%; 
+    display: flex; 
+    flex-direction: column;
+}
+#content{
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
