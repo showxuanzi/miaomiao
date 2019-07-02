@@ -73,6 +73,7 @@
     }
     .cinema_body .price{
         font-size: 18px;
+        color: #f90;
     }
     .cinema_body .address{
         font-size: 13px;
