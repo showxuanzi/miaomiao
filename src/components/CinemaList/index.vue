@@ -11,8 +11,10 @@
                     <span>{{item.distance}}</span>
                 </div>
                 <div class="card">
-                    <div>小吃</div>
-                    <div>折扣卡</div>
+                    <!-- vue 不建议v-for 和v-if一起使用 -->
+                    <div v-for="(itemCard,key) in item.tag" :key="key" :class="key | formatClass">
+                        <span v-if="itemCard == 1" :key="key">{{key | formatCard}}</span>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -27,15 +29,43 @@
             }
         },
         mounted(){
-            console.log("sddssss")
             this.axios.get('/api/cinemaList?cityId=10').then((res) => {
-                console.log(res);
                 var msg =  res.data.msg;
                 if(msg === 'ok'){
                     this.cinemaList = res.data.data.cinemas;
                     console.log(res)
                 }
             })
+        },
+        filters:{
+            formatCard(key){
+                var data = [
+                    {key: 'allowRefund', value: '改签'},
+                    {key: 'endorse', value: '退票'},
+                    {key: 'sell', value: '折扣卡'},
+                    {key: 'snack', value: '小吃'}
+                ];
+                for(var i = 0; i < data.length; i++){
+                    if(key === data[i].key){
+                        return data[i].value;
+                    }
+                }
+                return '';
+            },
+            formatClass(key){
+                var data = [
+                    {key: 'allowRefund', value: 'bl'},
+                    {key: 'endorse', value: 'bl'},
+                    {key: 'sell', value: 'or'},
+                    {key: 'snack', value: 'or'}
+                ];
+                for(var i = 0; i < data.length; i++){
+                    if(key === data[i].key){
+                        return data[i].value;
+                    }
+                }
+                return '';
+            }
         }
     }
 </script>
@@ -73,7 +103,7 @@
     .cinema_body .card{
         display: flex;
     }
-    .cinema_body .card div{
+    .cinema_body .card div span{
         padding: 0 3px;
         height: 15px;
         line-height: 15px;
@@ -82,11 +112,11 @@
         border: 1px solid #f90;
         margin-right: 4px;
     }
-    .cinema_body .card div.or{
+    .cinema_body .card div.or span{
         color: #f90;
         border: 1px solid #f90;
     }
-    .cinema_body .card div.bl{
+    .cinema_body .card div.bl span{
         color: #589daf;
         border: 1px solid #589daf;
     }

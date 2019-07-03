@@ -50,11 +50,12 @@
                 //         this.movieList = movies.list;
                 //     }
                 // })
+                
                 // 防止多次请求
                 var that  = this;
                 this.cancelRequest();
                 this.axios.get('/api/searchList?cityId=10&kw=' + newVal,{
-                    cancelToken: new this.axios.CancelToken(function(c){
+                    cancelToken: new this.axios.CancelToken(function(c){//通过将执行器函数传递给CancelToken构造函数来创建取消令牌
                         that.source = c;
                     })
                 }).then((res) => {
