@@ -34,7 +34,6 @@
                 var msg =  res.data.msg;
                 if(msg === 'ok'){
                     this.cinemaList = res.data.data.cinemas;
-                    console.log(res)
                 }
             })
         },

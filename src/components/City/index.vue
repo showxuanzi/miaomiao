@@ -161,11 +161,12 @@
         justify-content: center;
         text-align: center;
         border-left: 1px solid #e6e6e6;
-        height: 100%;
+        height: 90%;
         position: fixed;
         top: 95px;
         background: #fff;
         right: 0;
         bottom: 50px;
     }
+    
 </style>
