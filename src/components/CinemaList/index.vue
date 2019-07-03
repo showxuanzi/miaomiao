@@ -11,7 +11,8 @@
                     <span>{{item.distance}}</span>
                 </div>
                 <div class="card">
-                    <!-- vue 不建议v-for 和v-if一起使用 -->
+                    <!-- vue 不建议v-for 和v-if一起使用-->
+                    <!-- <div v-for="(itemCard,key) in item.tag" :key="key" :class="key | formatClass" v-if="itemCard == 1">{{key | formatCard}}</div> -->
                     <div v-for="(itemCard,key) in item.tag" :key="key" :class="key | formatClass">
                         <span v-if="itemCard == 1" :key="key">{{key | formatCard}}</span>
                     </div>
