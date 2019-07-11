@@ -1,26 +1,31 @@
 <template>
     <div class="city_body">
         <div class="city_list">
-            <div class="city_hot">
-                <h2>热门城市</h2>
-                <ul class="clearfix">
-                    <li v-for="item in hotList" :key="item.id">{{item.nm}}</li>
-                </ul>
-            </div>
-            <div class="city_sort" ref="city_sort">
-                <div v-for="item in cityList" :key="item.id">
-                    <h2>{{item.index}}</h2>
-                    <ul>
-                        <li v-for="city in item.list" :key="city.id">{{city.nm}}</li>
-                    </ul>
+            <Scroll ref="city_list">
+                <div>
+                    <div class="city_hot">
+                        <h2>热门城市</h2>
+                        <ul class="clearfix">
+                            <li v-for="item in hotList" :key="item.id">{{item.nm}}</li>
+                        </ul>
+                    </div>
+                    <div class="city_sort" ref="city_sort">
+                        <div v-for="item in cityList" :key="item.id">
+                            <h2>{{item.index}}</h2>
+                            <ul>
+                                <li v-for="city in item.list" :key="city.id">{{city.nm}}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="city_index">
-                <ul>
-                    <li v-for="(item,index) in cityList" :key="item.id" @touchstart="handleToIndex(index)">{{item.index}}</li>
-                </ul>
-            </div>
+            </Scroll>
         </div>
+        <div class="city_index">
+            <ul>
+                <li v-for="(item,index) in cityList" :key="item.id" @touchstart="handleToIndex(index)">{{item.index}}</li>
+            </ul>
+        </div>
+        
     </div>
 </template>
 <script>
@@ -90,7 +95,8 @@
             },
             handleToIndex(index){
                 var h2 = this.$refs.city_sort.getElementsByTagName("h2");
-                this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
+                // this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop; 被better-scroll管理，原生方法失效
+                this.$refs.city_list.toScrollTop(-h2[index].offsetTop);
             }
         }
     }
