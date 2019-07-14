@@ -1,7 +1,8 @@
 <template>
     <div class="city_body">
         <div class="city_list">
-            <Scroll ref="city_list">
+            <Loading v-if="isLoading"/>
+            <Scroll v-else ref="city_list">
                 <div>
                     <div class="city_hot">
                         <h2>热门城市</h2>
@@ -34,20 +35,31 @@
         data(){
             return {
                 cityList: [],
-                hotList: []
+                hotList: [],
+                isLoading: true
             }
         },
         mounted(){
-            this.axios.get('/api/cityList').then((res) => {
-                // console.log(res);
+            var cityList = window.localStorage.getItem('cityList');
+            var hotList = window.localStorage.getItem('hotList');
+            if(cityList && hotList){
+                this.cityList = JSON.parse(cityList);
+                this.hotList = JSON.parse(hotList);
+                this.isLoading = false;
+            }else{
+                this.axios.get('/api/cityList').then((res) => {
                 var msg = res.data.msg;
                 if(msg === "ok"){
                     var cities = res.data.data.cities;
                     var { cityList,hotList } = this.formatCity(cities);
                     this.cityList = cityList;
                     this.hotList = hotList;
+                    this.isLoading =  false;
+                    window.localStorage.setItem('cityList',JSON.stringify(cityList));
+                    window.localStorage.setItem('hotList',JSON.stringify(hotList));
                 }
             });
+            }
         },
         methods : {
             formatCity (cities) {

@@ -1,6 +1,7 @@
 <template>
     <div class="movie_body" ref="movie_body">
-        <Scroll :handleToScroll='handleToScroll' :handleToTouchEnd='handleToTouchEnd'>
+        <Loading v-if="isLoading"/>
+        <Scroll v-else :handleToScroll='handleToScroll' :handleToTouchEnd='handleToTouchEnd'>
             <ul>
                 <li class="pull_down">{{scrollMsg}}</li>
                 <li v-for="item in movieList" :key="item.id">
@@ -24,7 +25,8 @@
         data(){
             return {
                 movieList: [],
-                scrollMsg: ''
+                scrollMsg: '',
+                isLoading: true
             }
         },
         mounted(){
@@ -32,35 +34,7 @@
                 var msg = res.data.msg;
                 if(msg === 'ok'){
                     this.movieList = res.data.data.movieList;
-                    // 页面渲染完成后调用BScroll，$nextTick方法指的是数据赋值完成，页面渲染完成后执行里面的回调
-                    this.$nextTick(() => {
-                        // var scroll = new BScroll(this.$refs.movie_body,{
-                        //     tap: true, // 点击事件
-                        //     probeType: 1 // 触发滚动事件，非实时（屏幕滑动超过一定时间后）派发scroll事件
-                        // });
-                        // // 下拉刷新
-                        // scroll.on("scroll", (para) => {
-                        //     if(para.y > 30){
-                        //         this.scrollMsg = '正在更新';
-                        //     }
-                        // });
-                        // scroll.on("touchEnd",(para) => {
-                        //     if(para.y > 30){
-                                
-                        //         this.axios.get('/api/movieOnInfoList?cityId=11').then((res) => {
-                        //             var msg = res.data.msg;
-                        //             if(msg === 'ok'){
-                        //                 this.scrollMsg = '更新完成';
-                        //                 setTimeout(() => {
-                        //                     this.movieList = res.data.data.movieList;
-                        //                     this.scrollMsg = '';
-                        //                 },1000)
-                        //             }
-                        //         })
-                        //     }
-                            
-                        // })
-                    });
+                    this.isLoading = false;
                 }
             })
         },
