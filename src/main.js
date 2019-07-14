@@ -13,6 +13,9 @@ Vue.filter("setWH",(url,arg) => {
 import Scroll from '@/components/Scroll'
 Vue.component('Scroll',Scroll);
 
+import Loading from '@/components/Loading'
+Vue.component('Loading',Loading);
+
 Vue.config.productionTip = false
 
 new Vue({
