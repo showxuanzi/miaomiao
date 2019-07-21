@@ -7,14 +7,14 @@
                     <div class="city_hot">
                         <h2>热门城市</h2>
                         <ul class="clearfix">
-                            <li v-for="item in hotList" :key="item.id">{{item.nm}}</li>
+                            <li v-for="item in hotList" :key="item.id" @tap="handleToCity(item.nm,item.id)">{{item.nm}}</li>
                         </ul>
                     </div>
                     <div class="city_sort" ref="city_sort">
                         <div v-for="item in cityList" :key="item.id">
                             <h2>{{item.index}}</h2>
                             <ul>
-                                <li v-for="city in item.list" :key="city.id">{{city.nm}}</li>
+                                <li v-for="city in item.list" :key="city.id" @tap="handleToCity(city.nm,city.id)">{{city.nm}}</li>
                             </ul>
                         </div>
                     </div>
@@ -109,6 +109,13 @@
                 var h2 = this.$refs.city_sort.getElementsByTagName("h2");
                 // this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop; 被better-scroll管理，原生方法失效
                 this.$refs.city_list.toScrollTop(-h2[index].offsetTop);
+            },
+            // 各个城市点击事件
+            handleToCity(nm,id){
+                this.$store.commit('city/CITY_INFOR',{nm,id});
+                window.localStorage.setItem('nowNm',nm);
+                window.localStorage.setItem('nowId',id);
+                this.$router.push('/movie/nowPlaying');
             }
         }
     }

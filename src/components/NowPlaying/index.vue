@@ -26,15 +26,20 @@
             return {
                 movieList: [],
                 scrollMsg: '',
-                isLoading: true
+                isLoading: true,
+                prevCityId: -1
             }
         },
-        mounted(){
-            this.axios.get('/api/movieOnInfoList?cityId=10').then((res) => {
+        activated(){
+            var cityId = this.$store.state.city.id;
+            if(this.prevCityId === cityId){ return; }//当没有切换城市的时候，不执行下面操作
+            this.isLoading = true;
+            this.axios.get('/api/movieOnInfoList?cityId='+cityId).then((res) => {
                 var msg = res.data.msg;
                 if(msg === 'ok'){
                     this.movieList = res.data.data.movieList;
                     this.isLoading = false;
+                    this.prevCityId = cityId;
                 }
             })
         },
