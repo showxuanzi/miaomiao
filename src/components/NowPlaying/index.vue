@@ -19,7 +19,6 @@
     </div>
 </template>
 <script>
-    import BScroll from 'better-scroll';
     export default {
         name:'NowPlaying',
         data(){
@@ -30,7 +29,7 @@
                 prevCityId: -1
             }
         },
-        activated(){
+        activated(){//keep-alive激活的时候调用
             var cityId = this.$store.state.city.id;
             if(this.prevCityId === cityId){ return; }//当没有切换城市的时候，不执行下面操作
             this.isLoading = true;

@@ -99,10 +99,7 @@
                     }
                     return true
                 }
-                return {
-                	cityList,
-                	hotList
-                };
+                return {cityList,hotList};
 
             },
             handleToIndex(index){
