@@ -19,6 +19,9 @@
             </keep-alive>
         </div>
         <TabBar/>
+        <transition>
+            <router-view name="detail"/>
+        </transition>
     </div>
 </template>
 <script>

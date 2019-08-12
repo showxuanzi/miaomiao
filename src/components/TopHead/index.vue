@@ -1,6 +1,6 @@
 <template>
     <header id="topHead"> 
-        <h1>{{title}}</h1>
+        <slot></slot><h1>{{title}}</h1>
     </header>
 </template>
 <script>
@@ -24,6 +24,7 @@
         position: fixed;
         left: 0;
         top:0;
+        z-index: 10;
     }
     #topHead h1{
         font-size: 18px;
