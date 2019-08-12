@@ -40,6 +40,7 @@
             }
         },
         mounted(){
+            console
             var cityList = window.localStorage.getItem('cityList');
             var hotList = window.localStorage.getItem('hotList');
             if(cityList && hotList){

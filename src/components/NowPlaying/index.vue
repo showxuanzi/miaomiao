@@ -44,7 +44,6 @@
         },
         methods: {
             handleToDetail(){
-                console.log("dddser")
             },
             handleToScroll(pos){
                 if(pos.y > 30){
