@@ -42,7 +42,7 @@ li{
 #content{
     flex: 1;
     overflow: hidden;
-    margin-bottom: 50px;
+    margin: 50px 0;
     position: relative;
     display: flex;
     flex-direction: column;

@@ -42,6 +42,5 @@
         justify-content: space-around;
         align-items: center;
         background: white;
-        margin-top: 50px;
     } 
 </style>

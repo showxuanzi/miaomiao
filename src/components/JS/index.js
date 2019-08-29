@@ -2,16 +2,16 @@ import Vue from 'vue';
 import MessageBox from './MessageBox';
 
 export var messageBox = (function(){
-    var defaults = {
-        title: '',
-        content: '',
-        cancel: '',
-        ok: '',
-        handleCancel: null,
-        handleOk: null
-    };
-    var myComponent = Vue.extend(MessageBox);
     return function(opts){
+        var defaults = {
+            title: '',
+            content: '',
+            cancel: '',
+            ok: '',
+            handleCancel: null,
+            handleOk: null
+        };
+        var myComponent = Vue.extend(MessageBox);
         for(var attr in opts){
             defaults[attr] = opts[attr];
         }
@@ -25,7 +25,6 @@ export var messageBox = (function(){
             },
             methods:{
                 handleCancel(){
-                    console.log("ddd")
                     defaults.handleCancel && defaults.handleCancel.call(this);
                     document.body.removeChild(vm.$el);
                 },

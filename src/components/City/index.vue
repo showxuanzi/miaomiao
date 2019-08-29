@@ -120,7 +120,7 @@
 </script>
 <style scoped>
     #content .city_body{
-        margin-top: 95px;
+        margin-top: 45px;
         display: flex;
         width: 100%;
         position: absolute;

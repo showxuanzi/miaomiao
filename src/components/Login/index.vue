@@ -1,29 +1,56 @@
 <template>
     <div class="login_body">
         <div>
-            <input class="login_text" type="text" placeholder="账户名/手机号/Email">
+            <input v-model="username" class="login_text" type="text" placeholder="账户名/手机号/Email">
         </div>
         <div>
-            <input type="password" class="login_text" placeholder="请输入您的密码">
+            <input v-model="password" type="password" class="login_text" placeholder="请输入您的密码">
         </div>
         <div class="login_btn">
-            <input type="submit" value="登录" />
+            <input type="submit" value="登录" @touchstart="handleLogin"/>
         </div>
         <div class="login_link">
-            <a href="javascript:;">立即注册</a>
-            <a href="javascript:;">找回密码</a>
+            <router-link to='/mine/register'>立即注册</router-link>
+            <router-link to='/mine/findPassword'>找回密码</router-link>
         </div>
     </div>
 </template>
 <script>
+    import { messageBox } from '@/components/JS';
     export default {
         name:'Login', 
+        data(){
+            return {
+                username: '',
+                password: ''
+            }
+        },
+        methods:{
+            handleLogin(){
+                this.axios.post('/api2/users/login',{
+                    username: this.username,
+                    password: this.password
+                }).then( (res) => {
+                    var status = res.data.status;
+                    var that = this;
+                    if(status === 0){
+                        messageBox({
+                            title: '登录',
+                            content: '登陆成功',
+                            ok: '确认',
+                            handleOk(){
+                                that.$router.push('/mine/center')
+                            }
+                        })
+                    }
+                })
+            }
+        }
     }
 </script>
 <style scoped>
     .login_body{
         width: 100%;
-        margin-top: 50px;
     }
     .login_body .login_text{
         width: 100%;
