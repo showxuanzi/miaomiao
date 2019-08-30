@@ -42,6 +42,12 @@
                                 that.$router.push('/mine/center')
                             }
                         })
+                    }else{
+                        messageBox({
+                            title: '登录',
+                            content: '登录失败：'+ res.data.msg,
+                            ok: '确认'
+                        })
                     }
                 })
             }

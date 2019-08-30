@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import movieRouter from './movie'
 import cinemaRouter from './cinema'
 import mineRouter from './mine'
+import adminRouter from './admin'
 
 
 Vue.use(Router)
@@ -15,6 +16,7 @@ export default new Router({
     movieRouter,
     cinemaRouter,
     mineRouter,
+    adminRouter,
     {
       path: "/*",
       redirect: "/movie"//重定向，若找不到页面时返回到movie页面
